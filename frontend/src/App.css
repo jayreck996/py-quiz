@@ -157,9 +157,11 @@ body {
   letter-spacing: 0.5px;
 }
 
-.level-badge.beginner   { background: #1f3a1f; color: #56d364; border: 1px solid #238636; }
-.level-badge.intermediate { background: #1f2d3f; color: #58a6ff; border: 1px solid #1f6feb; }
-.level-badge.advanced   { background: #2d1f3f; color: #d2a8ff; border: 1px solid #8957e5; }
+.level-badge.beginner      { background: #1f3a1f; color: #56d364; border: 1px solid #238636; }
+.level-badge.intermediate  { background: #1f2d3f; color: #58a6ff; border: 1px solid #1f6feb; }
+.level-badge.advanced      { background: #2d1f3f; color: #d2a8ff; border: 1px solid #8957e5; }
+.level-badge.python        { background: #1f2d3f; color: #58a6ff; border: 1px solid #1f6feb; }
+.level-badge.typescript    { background: #1f2d3f; color: #79c0ff; border: 1px solid #388bfd; }
 
 .btn-home {
   align-self: flex-start;

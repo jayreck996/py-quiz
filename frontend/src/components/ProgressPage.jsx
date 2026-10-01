@@ -1,11 +1,10 @@
-import questions from '../data/questions'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { ChevronLeft, CheckCircle, XCircle, Circle } from 'lucide-react'
 
 const LEVEL_CLASS = { Beginner: 'beginner', Intermediate: 'intermediate', Advanced: 'advanced' }
 
-export default function ProgressPage({ answers, current, onJump, onBack }) {
+export default function ProgressPage({ questions, answers, current, onJump, onBack }) {
   return (
     <div className="progress-page">
       <div className="progress-page-header">

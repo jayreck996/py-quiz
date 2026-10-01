@@ -1,54 +1,51 @@
-import questions from './data/questions'
+import DOMAINS from './data/domains'
 import useQuizStorage from './hooks/useQuizStorage'
 import HomePage from './components/HomePage'
-import { House } from 'lucide-react'
 import QuizCard from './components/QuizCard'
 import ProgressBox from './components/ProgressBox'
 import ProgressPage from './components/ProgressPage'
 import ResultScreen from './components/ResultScreen'
+import { House } from 'lucide-react'
 
-const DOMAINS = (answered, total, score, current) => [
-  {
-    id: 'python',
-    name: 'Python',
-    icon: '🐍',
-    description: 'Zero to Hero',
-    tag: 'Beginner → Advanced',
-    total,
-    answered,
-    score,
-    current,
-  },
-]
+const DOMAIN_IDS = Object.keys(DOMAINS)
 
 export default function App() {
-  const { screen, current, score, answered, answers, setScreen, markAnswer, advance, jumpTo, reset } = useQuizStorage(questions.length)
+  const {
+    screen, activeDomain, current, score, answered, answers,
+    setScreen, enterDomain, markAnswer, advance, jumpTo, getDomainStats, resetDomain,
+  } = useQuizStorage(DOMAIN_IDS)
 
-  const domains = DOMAINS(answered, questions.length, score, current)
+  const domain = DOMAINS[activeDomain]
+  const questions = domain?.questions ?? []
+
+  const homeDomains = DOMAIN_IDS.map(id => {
+    const d = DOMAINS[id]
+    const stats = getDomainStats(id)
+    return { ...d, ...stats, total: d.questions.length }
+  })
 
   return (
     <div className="app">
       {screen === 'home' && (
-        <HomePage
-          domains={domains}
-          onEnter={() => setScreen('quiz')}
-        />
+        <HomePage domains={homeDomains} onEnter={enterDomain} />
       )}
 
       {screen === 'quiz' && (
         <div className="quiz-wrap">
-          <button className="btn-home" onClick={() => setScreen('home')} title="Home"><House size={16} /></button>
+          <button className="btn-home" onClick={() => setScreen('home')} title="Home">
+            <House size={16} />
+          </button>
           <QuizCard
-            key={current}
+            key={`${activeDomain}-${current}`}
             question={questions[current]}
             index={current}
             total={questions.length}
             savedAnswer={answers[current]?.selected ?? null}
             onMark={markAnswer}
-            onNext={advance}
+            onNext={() => advance(questions.length)}
           />
           <ProgressBox
-            domain="Python"
+            domain={domain.name}
             answered={answered}
             total={questions.length}
             score={score}
@@ -60,6 +57,7 @@ export default function App() {
 
       {screen === 'progress' && (
         <ProgressPage
+          questions={questions}
           answers={answers}
           current={current}
           onJump={jumpTo}
@@ -72,7 +70,7 @@ export default function App() {
           score={score}
           total={questions.length}
           answers={answers}
-          onRetry={reset}
+          onRetry={resetDomain}
           onJump={jumpTo}
         />
       )}
