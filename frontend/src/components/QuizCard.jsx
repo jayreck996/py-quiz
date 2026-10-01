@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { Copy, Check, RotateCcw, ArrowRight, CheckCircle, XCircle } from 'lucide-react'
+import { Copy, Check, RotateCcw, ArrowRight } from 'lucide-react'
 
 const LEVEL_CLASS = {
   Beginner: 'beginner',
@@ -82,12 +82,6 @@ export default function QuizCard({ question, index, total, savedAnswer, onMark, 
 
       {selected && (
         <>
-          <div className={`feedback ${isCorrect ? 'correct' : 'wrong'}`}>
-            {isCorrect
-              ? <><CheckCircle size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />Correct! Well done.</>
-              : <><XCircle size={15} style={{ verticalAlign: 'middle', marginRight: 6 }} />Not quite — the answer is {question.answer}.</>
-            }
-          </div>
           <div className="card-actions">
             <button className="btn-reset" onClick={handleReset} title="Reset selection">
               <RotateCcw size={15} />
