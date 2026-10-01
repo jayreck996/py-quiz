@@ -18,7 +18,7 @@ body {
 /* HOME PAGE */
 .home-page {
   width: 100%;
-  max-width: 680px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -43,8 +43,8 @@ body {
 }
 
 .domain-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 14px;
 }
 
@@ -160,8 +160,16 @@ body {
 .level-badge.beginner      { background: #1f3a1f; color: #56d364; border: 1px solid #238636; }
 .level-badge.intermediate  { background: #1f2d3f; color: #58a6ff; border: 1px solid #1f6feb; }
 .level-badge.advanced      { background: #2d1f3f; color: #d2a8ff; border: 1px solid #8957e5; }
-.level-badge.python        { background: #1f2d3f; color: #58a6ff; border: 1px solid #1f6feb; }
-.level-badge.typescript    { background: #1f2d3f; color: #79c0ff; border: 1px solid #388bfd; }
+.level-badge.python           { background: #1f2d3f; color: #58a6ff;  border: 1px solid #1f6feb; }
+.level-badge.typescript       { background: #1f2d3f; color: #79c0ff;  border: 1px solid #388bfd; }
+.level-badge.bash             { background: #1f3a1f; color: #56d364;  border: 1px solid #238636; }
+.level-badge.git              { background: #3a1f1f; color: #ff7b72;  border: 1px solid #da3633; }
+.level-badge.docker           { background: #1f2d3f; color: #58a6ff;  border: 1px solid #1f6feb; }
+.level-badge.kubernetes       { background: #1f2d3f; color: #79c0ff;  border: 1px solid #388bfd; }
+.level-badge.terraform        { background: #2d1f3f; color: #d2a8ff;  border: 1px solid #8957e5; }
+.level-badge.github-actions   { background: #1f3a1f; color: #56d364;  border: 1px solid #238636; }
+.level-badge.sql              { background: #3a2d1f; color: #f0883e;  border: 1px solid #d4780a; }
+.level-badge.yaml             { background: #3a1f2d; color: #f778ba;  border: 1px solid #bf4b8a; }
 
 .btn-home {
   align-self: flex-start;
