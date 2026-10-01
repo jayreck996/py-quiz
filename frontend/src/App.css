@@ -42,6 +42,36 @@ body {
   font-size: 0.95rem;
 }
 
+.company-brief {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-left: 3px solid #58a6ff;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.company-brief-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #58a6ff;
+}
+
+.company-brief-text {
+  font-size: 0.88rem;
+  color: #8b949e;
+  line-height: 1.6;
+}
+
+.company-brief-text strong {
+  color: #e6edf3;
+  font-weight: 600;
+}
+
 .domain-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

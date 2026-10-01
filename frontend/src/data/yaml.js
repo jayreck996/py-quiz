@@ -2,94 +2,303 @@ const questions = [
   // --- BEGINNER ---
   {
     id: 1, level: 'Beginner',
-    code: 'name: John\nage: 30\nactive: true',
-    choices: ['A. It defines three variables in a script', 'B. It creates a YAML mapping with three key-value pairs', 'C. It declares a JSON object', 'D. It creates an array of three items'],
+    code: `app: streambox
+version: "2.4.0"
+region: us-east-1`,
+    choices: [
+      'A. It defines a YAML array of three items',
+      'B. It defines three key-value pairs for the StreamBox app config',
+      'C. It raises a parse error — values must be quoted',
+      'D. It defines a nested YAML object',
+    ],
     answer: 'B',
   },
   {
     id: 2, level: 'Beginner',
-    code: 'fruits:\n  - apple\n  - banana\n  - cherry',
-    choices: ['A. It creates a nested mapping under fruits', 'B. It defines three separate variables', 'C. It defines a key fruits with a list of three items', 'D. It imports three modules'],
-    answer: 'C',
+    code: `services:
+  - encoding
+  - cdn
+  - metadata
+  - billing`,
+    choices: [
+      'A. It defines a YAML object with four keys',
+      'B. It defines a list of four StreamBox service names under the services key',
+      'C. It raises a parse error — lists must use [] syntax',
+      'D. It defines nested service objects',
+    ],
+    answer: 'B',
   },
   {
     id: 3, level: 'Beginner',
-    code: 'server:\n  host: localhost\n  port: 5432',
-    choices: ['A. It defines a flat list of server properties', 'B. It creates a nested mapping with host and port under server', 'C. It starts a server on localhost', 'D. It declares two environment variables'],
+    code: `database:
+  host: db.streambox.io
+  port: 5432
+  name: streambox_prod`,
+    choices: [
+      'A. It defines a flat list of database properties',
+      'B. It defines a nested mapping with host, port, and name under database',
+      'C. It raises a parse error — integers must be quoted',
+      'D. It defines an array of database connections',
+    ],
     answer: 'B',
   },
   {
     id: 4, level: 'Beginner',
-    code: 'enabled: true\ncount: 42\nlabel: "42"',
-    choices: ['A. All three values are strings', 'B. enabled is boolean, count is integer, label is string', 'C. All three values are integers', 'D. YAML cannot distinguish between 42 and "42"'],
+    code: `# StreamBox CDN configuration
+cdn:
+  url: https://cdn.streambox.io
+  ttl: 86400  # 24 hours in seconds`,
+    choices: [
+      'A. It raises a parse error — comments are not allowed in YAML',
+      'B. It defines a CDN config with comments — the # lines are ignored by the parser',
+      'C. It includes the comment text as part of the ttl value',
+      'D. It requires the comment to match the value exactly',
+    ],
     answer: 'B',
   },
   {
     id: 5, level: 'Beginner',
-    code: 'timeout: null\nretries: ~',
-    choices: ['A. Both values are set to zero', 'B. Both values represent null — null and ~ are equivalent in YAML', 'C. ~ means an empty string in YAML', 'D. This is invalid YAML syntax'],
+    code: `enabled: true
+max_bitrate: 8000
+use_hdr: false`,
+    choices: [
+      'A. It defines all values as strings',
+      'B. It defines a boolean, integer, and boolean using native YAML types',
+      'C. It raises a parse error — booleans must be 0 or 1',
+      'D. It requires quotes around true and false',
+    ],
     answer: 'B',
   },
   // --- INTERMEDIATE ---
   {
     id: 6, level: 'Intermediate',
-    code: 'description: |\n  Line one\n  Line two\n  Line three',
-    choices: ['A. It creates a list of three lines', 'B. It defines a literal block scalar preserving newlines', 'C. It joins all lines into a single string without newlines', 'D. It creates three separate keys'],
+    code: `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streambox-config
+  namespace: production
+data:
+  CDN_URL: "https://cdn.streambox.io"
+  MAX_CONCURRENT_STREAMS: "500"
+  ENABLE_4K: "true"`,
+    choices: [
+      'A. It creates a Kubernetes Secret for sensitive configuration',
+      'B. It defines a Kubernetes ConfigMap with three environment variable values',
+      'C. It raises an error — ConfigMap values must be integers',
+      'D. It defines a Deployment manifest with environment variables',
+    ],
     answer: 'B',
   },
   {
     id: 7, level: 'Intermediate',
-    code: 'defaults: &defaults\n  timeout: 30\n  retries: 3\n\nproduction:\n  <<: *defaults\n  timeout: 60',
-    choices: ['A. It copies defaults into production and overrides timeout', 'B. It creates two independent configurations', 'C. It merges production into defaults', 'D. It raises an error for duplicate timeout'],
-    answer: 'A',
+    code: `resolutions:
+  - name: SD
+    height: 480
+    bitrate: 1000
+  - name: HD
+    height: 720
+    bitrate: 3000
+  - name: FHD
+    height: 1080
+    bitrate: 6000`,
+    choices: [
+      'A. It defines a flat list of resolution names',
+      'B. It defines a list of objects each with name, height, and bitrate properties',
+      'C. It raises a parse error — lists cannot contain mappings',
+      'D. It defines three separate YAML documents',
+    ],
+    answer: 'B',
   },
   {
     id: 8, level: 'Intermediate',
-    code: 'services:\n  db:\n    image: postgres\n    environment:\n      POSTGRES_DB: mydb\n      POSTGRES_PASSWORD: secret',
-    choices: ['A. It defines a Docker Compose service with environment variables', 'B. It creates a Kubernetes ConfigMap', 'C. It defines environment variables for the host system', 'D. It starts a PostgreSQL server directly'],
-    answer: 'A',
+    code: `defaults: &defaults
+  timeout: 30
+  retries: 3
+  log_level: info
+
+encoding_service:
+  <<: *defaults
+  timeout: 120
+  workers: 8`,
+    choices: [
+      'A. It creates two completely independent service configs',
+      'B. It uses YAML anchors to inherit defaults, then overrides timeout and adds workers',
+      'C. It raises a parse error — << merge keys are not valid YAML',
+      'D. It ignores the defaults block entirely',
+    ],
+    answer: 'B',
   },
   {
     id: 9, level: 'Intermediate',
-    code: 'items:\n  - id: 1\n    name: Widget\n  - id: 2\n    name: Gadget',
-    choices: ['A. It defines a list of two flat strings', 'B. It defines a list of two mappings each with id and name', 'C. It creates two separate YAML documents', 'D. It defines two nested lists'],
+    code: `apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streambox-cdn
+spec:
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: cdn
+          image: streambox/cdn:latest
+          env:
+            - name: ORIGIN_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: streambox-config
+                  key: ORIGIN_BUCKET`,
+    choices: [
+      'A. It hard-codes the ORIGIN_BUCKET value in the manifest',
+      'B. It injects the ORIGIN_BUCKET env variable from a ConfigMap into the container',
+      'C. It raises an error — env cannot use valueFrom in Deployments',
+      'D. It creates a ConfigMap named streambox-config automatically',
+    ],
     answer: 'B',
   },
   {
     id: 10, level: 'Intermediate',
-    code: 'message: >-\n  This is a very long\n  single line message',
-    choices: ['A. It preserves newlines in the string', 'B. It folds the text into a single line and strips the trailing newline', 'C. It creates a list of two strings', 'D. It is invalid because of the dash after >'],
+    code: `volumes:
+  - name: video-storage
+    persistentVolumeClaim:
+      claimName: streambox-videos-pvc
+containers:
+  - name: encoder
+    image: streambox/encoder:latest
+    volumeMounts:
+      - name: video-storage
+        mountPath: /mnt/videos`,
+    choices: [
+      'A. It creates an ephemeral volume that is deleted when the pod restarts',
+      'B. It mounts a PersistentVolumeClaim into the encoder container at /mnt/videos',
+      'C. It raises an error — volumes must be defined inside the container spec',
+      'D. It creates the PVC automatically if it does not exist',
+    ],
     answer: 'B',
   },
   // --- ADVANCED ---
   {
     id: 11, level: 'Advanced',
-    code: 'apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: myapp\nspec:\n  replicas: 3',
-    choices: ['A. It defines a Docker Compose service', 'B. It defines a Kubernetes Deployment with 3 replicas', 'C. It creates a Helm chart', 'D. It configures a GitHub Actions job'],
+    code: `apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: streambox-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+    - host: api.streambox.io
+      http:
+        paths:
+          - path: /videos
+            pathType: Prefix
+            backend:
+              service:
+                name: streambox-video-service
+                port:
+                  number: 80`,
+    choices: [
+      'A. It creates a load balancer that routes all traffic to one service',
+      'B. It defines an Nginx ingress that routes /videos traffic to the video service with SSL redirect',
+      'C. It raises an error — annotations cannot control SSL behavior',
+      'D. It exposes port 443 directly on the pod',
+    ],
     answer: 'B',
   },
   {
     id: 12, level: 'Advanced',
-    code: 'on:\n  push:\n    branches:\n      - main\n      - \'release/**\'',
-    choices: ['A. It triggers on pushes to main only', 'B. It triggers on pushes to main or any release/* branch', 'C. It triggers on all branches except main', 'D. It creates two separate GitHub Actions workflows'],
+    code: `---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streambox-api
+spec:
+  selector:
+    app: streambox-api
+  ports:
+    - port: 80
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streambox-api`,
+    choices: [
+      'A. It raises a parse error — multiple documents in one file are not allowed',
+      'B. It defines two Kubernetes resources in a single YAML file separated by ---',
+      'C. It creates a service that points to a deployment in a different file',
+      'D. It merges the Service and Deployment into one resource',
+    ],
     answer: 'B',
   },
   {
     id: 13, level: 'Advanced',
-    code: '---\ndocument: one\n---\ndocument: two',
-    choices: ['A. It is invalid YAML with two root keys', 'B. It defines two separate YAML documents in a single file', 'C. It creates a list with two items', 'D. It comments out the second document'],
+    code: `apiVersion: v1
+kind: Secret
+metadata:
+  name: streambox-db-secret
+type: Opaque
+data:
+  DB_PASSWORD: c3RyZWFtYm94c2VjcmV0
+  DB_USER: c3RyZWFtYm94`,
+    choices: [
+      'A. It stores passwords in plain text inside Kubernetes',
+      'B. It stores base64-encoded credentials as a Kubernetes Secret',
+      'C. It raises an error — Secrets must use AES encryption',
+      'D. It automatically rotates the credentials every 30 days',
+    ],
     answer: 'B',
   },
   {
     id: 14, level: 'Advanced',
-    code: 'volumes:\n  - name: config-vol\n    configMap:\n      name: app-config\n      items:\n        - key: config.yaml\n          path: app.yaml',
-    choices: ['A. It mounts a secret as a volume', 'B. It creates a ConfigMap from a file', 'C. It mounts a specific ConfigMap key as a file at a custom path', 'D. It creates a PersistentVolumeClaim'],
-    answer: 'C',
+    code: `affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: gpu
+              operator: In
+              values:
+                - "true"
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: streambox-encoder
+          topologyKey: kubernetes.io/hostname`,
+    choices: [
+      'A. It schedules the pod on any available node',
+      'B. It requires GPU nodes and prefers spreading encoder pods across different hosts',
+      'C. It raises an error — nodeAffinity and podAntiAffinity cannot be combined',
+      'D. It only applies affinity rules at pod creation, not during rescheduling',
+    ],
+    answer: 'B',
   },
   {
     id: 15, level: 'Advanced',
-    code: 'matrix:\n  include:\n    - os: ubuntu\n      node: 18\n    - os: windows\n      node: 20',
-    choices: ['A. It runs jobs in sequence for each combination', 'B. It defines explicit matrix combinations for parallel CI runs', 'C. It creates two separate workflow files', 'D. It excludes ubuntu and windows from the matrix'],
+    code: `apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+images:
+  - name: streambox/api
+    newTag: "2.4.0"
+
+configMapGenerator:
+  - name: streambox-config
+    envs:
+      - config.env`,
+    choices: [
+      'A. It applies Helm chart values to the manifests',
+      'B. It uses Kustomize to patch the image tag and generate a ConfigMap from an env file',
+      'C. It raises an error — configMapGenerator requires a Kubernetes cluster connection',
+      'D. It merges all YAML files into a single manifest',
+    ],
     answer: 'B',
   },
 ]

@@ -2,7 +2,7 @@ import DOMAINS from './data/domains'
 import useQuizStorage from './hooks/useQuizStorage'
 import HomePage from './components/HomePage'
 import QuizCard from './components/QuizCard'
-import DomainCard from './components/DomainCard'
+import QuizFooter from './components/QuizFooter'
 import ProgressPage from './components/ProgressPage'
 import ResultScreen from './components/ResultScreen'
 import { House } from 'lucide-react'
@@ -12,7 +12,7 @@ const DOMAIN_IDS = Object.keys(DOMAINS)
 export default function App() {
   const {
     screen, activeDomain, current, score, answered, answers,
-    setScreen, enterDomain, markAnswer, advance, jumpTo, getDomainStats, resetDomain,
+    setScreen, goToDomain, markAnswer, advance, jumpTo, getDomainStats, resetDomain,
   } = useQuizStorage(DOMAIN_IDS)
 
   const domain = DOMAINS[activeDomain]
@@ -27,7 +27,7 @@ export default function App() {
   return (
     <div className="app">
       {screen === 'home' && (
-        <HomePage domains={homeDomains} onEnter={enterDomain} />
+        <HomePage domains={homeDomains} onEnter={goToDomain} />
       )}
 
       {screen === 'quiz' && (
@@ -44,10 +44,12 @@ export default function App() {
             onMark={markAnswer}
             onNext={() => advance(questions.length)}
           />
-          <DomainCard
-            domain={{ ...domain, total: questions.length, answered, score, current }}
-            onClick={() => setScreen('progress')}
-            ctaOverride="View Progress"
+          <QuizFooter
+            domain={domain}
+            answered={answered}
+            score={score}
+            total={questions.length}
+            onViewProgress={() => setScreen('progress')}
           />
         </div>
       )}
@@ -58,7 +60,7 @@ export default function App() {
           answers={answers}
           current={current}
           onJump={jumpTo}
-          onBack={() => setScreen('quiz')}
+          onBack={() => setScreen('home')}
         />
       )}
 

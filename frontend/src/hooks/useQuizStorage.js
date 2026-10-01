@@ -49,6 +49,13 @@ export default function useQuizStorage(domainIds) {
     persist(s, activeDomain, domains)
   }
 
+  // Go to a domain's progress list (used by home page cards)
+  const goToDomain = (domainId) => {
+    setActiveDomainState(domainId)
+    setScreenState('progress')
+    persist('progress', domainId, domains)
+  }
+
   const enterDomain = (domainId) => {
     setActiveDomainState(domainId)
     setScreenState('quiz')
@@ -111,6 +118,6 @@ export default function useQuizStorage(domainIds) {
 
   return {
     screen, activeDomain, current, score, answered, answers,
-    setScreen, enterDomain, markAnswer, advance, jumpTo, getDomainStats, resetDomain,
+    setScreen, goToDomain, enterDomain, markAnswer, advance, jumpTo, getDomainStats, resetDomain,
   }
 }

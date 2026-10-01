@@ -5,8 +5,9 @@ export default defineConfig({
   plugins: [react()],
   base: '/py-quiz/',
   server: {
-    proxy: {
-      '/api': 'http://localhost:8000'
-    }
+    watch: {
+      usePolling: true,
+      interval: 300,
+    },
   }
 })
