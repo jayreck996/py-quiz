@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const KEY = 'py-python-quiz'
+const KEY = 'py-quiz'
 
 function load() {
   try {
