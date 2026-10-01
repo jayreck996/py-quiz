@@ -47,6 +47,7 @@ export default function App() {
           <DomainCard
             domain={{ ...domain, total: questions.length, answered, score, current }}
             onClick={() => setScreen('progress')}
+            ctaOverride="View Progress"
           />
         </div>
       )}

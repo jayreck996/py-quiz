@@ -1,15 +1,13 @@
 import { ArrowRight, CheckCircle, XCircle } from 'lucide-react'
 
-export default function DomainCard({ domain, onClick }) {
+export default function DomainCard({ domain, onClick, ctaOverride }) {
   const { name, icon, description, tag, id, total, answered, score, current } = domain
   const wrong = answered - score
   const pct = Math.round((answered / total) * 100)
 
-  const cta = answered === 0
-    ? 'Start Quiz'
-    : answered === total
-    ? 'Review'
-    : `Resume — Q${current + 1}`
+  const cta = ctaOverride ?? (
+    answered === 0 ? 'Start Quiz' : answered === total ? 'Review' : `Resume — Q${current + 1}`
+  )
 
   return (
     <button className="domain-card" onClick={onClick}>
