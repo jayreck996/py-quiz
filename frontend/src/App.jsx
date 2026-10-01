@@ -48,6 +48,7 @@ export default function App() {
             onNext={advance}
           />
           <ProgressBox
+            domain="Python"
             answered={answered}
             total={questions.length}
             score={score}

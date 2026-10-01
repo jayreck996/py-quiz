@@ -1,4 +1,4 @@
-export default function ProgressBox({ answered, total, score, current, onClick }) {
+export default function ProgressBox({ domain, answered, total, score, current, onClick }) {
   const wrong = answered - score
   const remaining = total - answered
   const pct = Math.round((answered / total) * 100)
@@ -6,7 +6,8 @@ export default function ProgressBox({ answered, total, score, current, onClick }
   return (
     <div className="progress-box progress-box-clickable" onClick={onClick} title="View full progress"  role="button" tabIndex={0} onKeyDown={e => e.key === 'Enter' && onClick()}>
       <div className="progress-box-row">
-        <span className="pb-label">Question</span>
+        {domain && <span className="pb-domain">{domain}</span>}
+        <span className="pb-label">Q</span>
         <span className="pb-value">{current + 1} <span className="pb-muted">/ {total}</span></span>
       </div>
       <div className="pb-divider" />

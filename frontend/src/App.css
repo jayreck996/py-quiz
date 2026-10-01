@@ -334,6 +334,7 @@ body {
 }
 
 .pb-muted   { color: #8b949e; font-weight: 400; font-size: 0.85rem; }
+.pb-domain  { font-size: 0.78rem; font-weight: 700; color: #58a6ff; text-transform: uppercase; letter-spacing: 0.6px; margin-right: auto; }
 .pb-correct { font-size: 0.85rem; font-weight: 600; color: #56d364; }
 .pb-wrong   { font-size: 0.85rem; font-weight: 600; color: #ff7b72; }
 
