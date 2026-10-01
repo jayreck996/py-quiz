@@ -2,7 +2,7 @@ import DOMAINS from './data/domains'
 import useQuizStorage from './hooks/useQuizStorage'
 import HomePage from './components/HomePage'
 import QuizCard from './components/QuizCard'
-import ProgressBox from './components/ProgressBox'
+import DomainCard from './components/DomainCard'
 import ProgressPage from './components/ProgressPage'
 import ResultScreen from './components/ResultScreen'
 import { House } from 'lucide-react'
@@ -44,12 +44,8 @@ export default function App() {
             onMark={markAnswer}
             onNext={() => advance(questions.length)}
           />
-          <ProgressBox
-            domain={domain.name}
-            answered={answered}
-            total={questions.length}
-            score={score}
-            current={current}
+          <DomainCard
+            domain={{ ...domain, total: questions.length, answered, score, current }}
             onClick={() => setScreen('progress')}
           />
         </div>
