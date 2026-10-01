@@ -1,6 +1,7 @@
 import questions from './data/questions'
 import useQuizStorage from './hooks/useQuizStorage'
 import HomePage from './components/HomePage'
+import { House } from 'lucide-react'
 import QuizCard from './components/QuizCard'
 import ProgressBox from './components/ProgressBox'
 import ProgressPage from './components/ProgressPage'
@@ -36,7 +37,7 @@ export default function App() {
 
       {screen === 'quiz' && (
         <div className="quiz-wrap">
-          <button className="btn-home" onClick={() => setScreen('home')}>← Home</button>
+          <button className="btn-home" onClick={() => setScreen('home')} title="Home"><House size={16} /></button>
           <QuizCard
             key={current}
             question={questions[current]}

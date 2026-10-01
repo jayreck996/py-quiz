@@ -1,6 +1,7 @@
 import questions from '../data/questions'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { ChevronLeft, CheckCircle, XCircle, Circle } from 'lucide-react'
 
 const LEVEL_CLASS = { Beginner: 'beginner', Intermediate: 'intermediate', Advanced: 'advanced' }
 
@@ -8,7 +9,7 @@ export default function ProgressPage({ answers, current, onJump, onBack }) {
   return (
     <div className="progress-page">
       <div className="progress-page-header">
-        <button className="btn-home" onClick={onBack}>← Back to Quiz</button>
+        <button className="btn-home" onClick={onBack} title="Back to quiz"><ChevronLeft size={16} /></button>
         <h2 className="progress-page-title">Quiz Progress</h2>
       </div>
 
@@ -16,10 +17,10 @@ export default function ProgressPage({ answers, current, onJump, onBack }) {
         {questions.map((q, i) => {
           const ans = answers[i]
           const isCurrent = i === current
+          let statusIcon = <Circle size={15} />
           let statusClass = 'prow-status unanswered'
-          let statusLabel = '—'
-          if (ans?.correct) { statusClass = 'prow-status correct'; statusLabel = '✓' }
-          else if (ans && !ans.correct) { statusClass = 'prow-status wrong'; statusLabel = '✗' }
+          if (ans?.correct) { statusClass = 'prow-status correct'; statusIcon = <CheckCircle size={15} /> }
+          else if (ans && !ans.correct) { statusClass = 'prow-status wrong'; statusIcon = <XCircle size={15} /> }
 
           return (
             <button
@@ -40,7 +41,7 @@ export default function ProgressPage({ answers, current, onJump, onBack }) {
                   {q.code.split('\n')[0]}
                 </SyntaxHighlighter>
               </span>
-              <span className={statusClass}>{statusLabel}</span>
+              <span className={statusClass}>{statusIcon}</span>
             </button>
           )
         })}

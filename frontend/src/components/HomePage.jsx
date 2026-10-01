@@ -1,3 +1,5 @@
+import { ArrowRight, CheckCircle, XCircle } from 'lucide-react'
+
 export default function HomePage({ domains, onEnter }) {
   return (
     <div className="home-page">
@@ -24,9 +26,13 @@ export default function HomePage({ domains, onEnter }) {
                 <span className="dc-stat-label"> / {d.total} answered</span>
               </span>
               <span className="dc-stat">
-                <span className="dc-stat-correct">{d.score} correct</span>
+                <CheckCircle size={13} style={{ verticalAlign: 'middle', marginRight: 4 }} />
+                <span className="dc-stat-correct">{d.score}</span>
                 {d.answered - d.score > 0 && (
-                  <span className="dc-stat-wrong">  {d.answered - d.score} wrong</span>
+                  <>
+                    <XCircle size={13} style={{ verticalAlign: 'middle', margin: '0 4px 0 10px' }} />
+                    <span className="dc-stat-wrong">{d.answered - d.score}</span>
+                  </>
                 )}
               </span>
             </div>
@@ -37,7 +43,7 @@ export default function HomePage({ domains, onEnter }) {
 
             <div className="dc-cta">
               {d.answered === 0 ? 'Start Quiz' : d.answered === d.total ? 'Review' : `Resume — Q${d.current + 1}`}
-              <span className="dc-arrow"> →</span>
+              <ArrowRight size={15} style={{ verticalAlign: 'middle', marginLeft: 6 }} />
             </div>
           </button>
         ))}
