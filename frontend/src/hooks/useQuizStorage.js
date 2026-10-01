@@ -28,7 +28,8 @@ export default function useQuizStorage(totalQuestions) {
 
   const [screen, setScreenState] = useState(() => {
     const s = saved?.screen
-    return s && s !== 'start' ? s : 'quiz'
+    if (!s || s === 'start') return 'home'
+    return s
   })
   const [current, setCurrentState] = useState(() => saved?.current ?? 0)
   const [answers, setAnswersState] = useState(() => saved?.answers ?? {})
@@ -75,7 +76,7 @@ export default function useQuizStorage(totalQuestions) {
 
   const reset = () => {
     clear()
-    setScreenState('quiz')
+    setScreenState('home')
     setCurrentState(0)
     setAnswersState({})
   }

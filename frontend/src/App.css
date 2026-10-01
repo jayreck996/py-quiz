@@ -15,6 +15,110 @@ body {
   padding: 24px;
 }
 
+/* HOME PAGE */
+.home-page {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.home-header { text-align: center; }
+
+.home-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: #58a6ff;
+  letter-spacing: -1px;
+}
+
+.home-title span { color: #f0883e; }
+
+.home-subtitle {
+  margin-top: 8px;
+  color: #8b949e;
+  font-size: 0.95rem;
+}
+
+.domain-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.domain-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 20px 22px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.domain-card:hover { border-color: #58a6ff; background: #1c2128; }
+
+.dc-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.dc-icon { font-size: 2rem; line-height: 1; }
+
+.dc-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e6edf3;
+}
+
+.dc-desc {
+  font-size: 0.8rem;
+  color: #8b949e;
+  margin-top: 2px;
+}
+
+.dc-top .level-badge { margin-left: auto; }
+
+.dc-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.dc-stat { font-size: 0.85rem; }
+.dc-stat-val    { font-weight: 700; color: #e6edf3; }
+.dc-stat-label  { color: #8b949e; }
+.dc-stat-correct { color: #56d364; font-weight: 600; }
+.dc-stat-wrong   { color: #ff7b72; font-weight: 600; }
+
+.dc-bar-wrap {
+  background: #21262d;
+  border-radius: 4px;
+  height: 5px;
+  overflow: hidden;
+}
+
+.dc-bar-fill {
+  height: 100%;
+  background: #238636;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.dc-cta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #58a6ff;
+}
+
+.dc-arrow { opacity: 0.6; }
+
 /* START SCREEN */
 .start-screen {
   text-align: center;
